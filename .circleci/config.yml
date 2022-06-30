@@ -37,8 +37,24 @@ jobs:
           command: |
             ansible-playbook -i inventory.txt setup_web_server.yml
 
+  smoke_test:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: apk add --update curl
+      - run:
+        name: smoke test
+        command: |
+          URL="https://blog.udacity.com/"
+          if curl -s -head ${URL}
+          then
+            return 0
+          else
+            return 1
+          fi
 workflows:
   cloud_formation_stackflow:
     jobs:
       # - create_infrastructure
-      - configure_infrastructure
+      # - configure_infrastructure
+      - smoke_test
