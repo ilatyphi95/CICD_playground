@@ -2,7 +2,7 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-orbs:
+# orbs:
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -13,12 +13,12 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Create Cloudformation Stack
-        command: |
-          aws cloudformation deploy \
-                  --template-file template.yml \
-                  --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
-                  --region us-east-1
+          name: Create Cloudformation Stack
+          command: |
+            aws cloudformation deploy \
+                    --template-file template.yml \
+                    --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+                    --region us-east-1
 workflows:
   cloud_formation_stackflow:
     jobs:
