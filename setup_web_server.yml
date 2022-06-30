@@ -1,0 +1,9 @@
+---
+- name: Exercise for settting up a web in an EC
+  hosts: 18.213.247.85
+  user: ubuntu
+  become: true
+  become_method: sudo
+  become_user: root
+  roles:
+    - setup
